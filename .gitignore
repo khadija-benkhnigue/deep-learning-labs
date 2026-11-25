@@ -1,0 +1,12 @@
+data/
+*.csv
+*.tar
+*.tar.gz
+*.pt
+*.pth
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+Thumbs.db

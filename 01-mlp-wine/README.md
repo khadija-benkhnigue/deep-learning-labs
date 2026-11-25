@@ -2,6 +2,12 @@
 
 Classification de 178 vins en 3 classes à partir de 13 mesures chimiques, avec un perceptron multicouche (MLP). Le TP compare deux fonctions de coût (cross-entropy et MSE) et l'effet de la normalisation par lots (BatchNorm).
 
+## Objectif et données
+
+- **Objectif** : prendre en main PyTorch sur un problème de classification multiclasse avec un perceptron multicouche. Il s'agit de prédire, à partir de 13 mesures chimiques, de quel type de vin il s'agit parmi 3 classes.
+- **Données** : jeu de données Wine (UCI), fourni avec scikit-learn (`load_wine`) : 178 exemples, 13 variables numériques, 3 classes (trois cultivars d'une même région d'Italie).
+- **Évaluation** : taux de reconnaissance (accuracy) sur un jeu de test de 40 % des données, moyenné sur 10 découpages train/test différents, avec son écart-type.
+
 ## Résultats
 
 Moyenne ± écart-type du taux de reconnaissance sur le jeu de test, sur 10 essais :

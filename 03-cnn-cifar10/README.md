@@ -2,6 +2,12 @@
 
 Classification d'images CIFAR-10 (10 classes, images couleur 32×32) avec un petit réseau convolutif entraîné sur CPU, et visualisation des cartes de caractéristiques (feature maps) des deux couches de convolution.
 
+## Objectif et données
+
+- **Objectif** : construire un petit réseau convolutif capable de classer des images en 10 catégories, et visualiser ce que ses deux couches de convolution extraient d'une image.
+- **Données** : CIFAR-10, 60 000 images couleur de 32×32 pixels réparties en 10 classes équilibrées (avion, automobile, oiseau, chat, cerf, chien, grenouille, cheval, bateau, camion), dont 50 000 pour l'entraînement et 10 000 pour le test. Le jeu est téléchargé automatiquement par torchvision.
+- **Évaluation** : taux de reconnaissance (accuracy) sur les 10 000 images de test.
+
 ## Résultat
 
 | Métrique (après 15 époques) | Valeur |

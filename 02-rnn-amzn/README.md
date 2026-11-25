@@ -2,6 +2,12 @@
 
 Prédiction du cours de clôture d'Amazon (AMZN) du jour suivant à partir des `lookback` jours précédents, avec un LSTM et un GRU à deux couches. Le TP explore l'effet de la longueur de la fenêtre (`lookback`) et de la taille de la couche cachée, et compare les modèles à une **baseline naïve** : « le prix de demain sera celui d'aujourd'hui ».
 
+## Objectif et données
+
+- **Objectif** : prédire le cours de clôture d'Amazon du lendemain, comparer deux architectures récurrentes (LSTM et GRU) et mesurer l'effet de la longueur de la fenêtre d'entrée et de la taille de la couche cachée.
+- **Données** : historique quotidien d'Amazon du 3 janvier 2006 au 29 décembre 2017, soit 3 019 jours de cotation (colonnes `Date`, `Open`, `High`, `Low`, `Close`, `Volume`, `Name`). Seul le cours de clôture (`Close`) est utilisé. Le fichier `AMZN_2006-01-01_to_2018-01-01.csv` a été téléchargé sur Kaggle (il se retrouve en recherchant ce nom de fichier).
+- **Évaluation** : erreur quadratique moyenne (MSE) en dollars² sur la partie la plus récente de la série (du 10 août 2015 au 29 décembre 2017, 604 jours), comparée à une baseline naïve.
+
 ## Résultat principal
 
 **Aucun des modèles ne fait nettement mieux que la baseline.**
@@ -36,8 +42,8 @@ Baseline : 152,17 (identique pour tous les lookbacks, puisque le jeu de test est
 
 ## Protocole
 
-- **Données** : 3 019 jours de cotation (2006-01-03 à 2017-12-29), colonne `Close`. Le fichier n'est pas inclus dans le dépôt.
-- **Découpage chronologique** : les 80 % premiers jours pour l'entraînement (jusqu'à mi-2015 environ), les 20 % suivants pour le test (604 jours). Aucun mélange entre passé et futur.
+- **Données** : 3 019 jours de cotation (2006-01-03 à 2017-12-29), colonne `Close`. Le fichier n'est pas inclus dans le dépôt (voir « Lancer le code »).
+- **Découpage chronologique** : les 80 % premiers jours pour l'entraînement (cibles jusqu'au 7 août 2015), les 20 % suivants pour le test (du 10 août 2015 au 29 décembre 2017, 604 jours). Aucun mélange entre passé et futur.
 - **Représentation des fenêtres** : chaque fenêtre de prix est exprimée en variation relative par rapport à son dernier prix (`prix / dernier_prix - 1`), la cible aussi. Le prix est multiplié par environ 25 entre 2006 et 2017 ; avec des prix bruts normalisés sur l'entraînement, le test sortirait très largement de la plage vue à l'entraînement. Cette représentation évite ce problème et ne nécessite aucun scaler ajusté sur le test.
 - **Normalisation** : les valeurs sont divisées par l'écart-type des cibles de l'entraînement (calculé sur l'entraînement uniquement).
 - **Erreur** : on revient au prix prédit puis on calcule la MSE en dollars² sur le jeu de test.
@@ -51,7 +57,7 @@ Baseline : 152,17 (identique pour tous les lookbacks, puisque le jeu de test est
 pip install -r ../requirements.txt
 ```
 
-Place le fichier `AMZN_2006-01-01_to_2018-01-01.csv` dans ce dossier, puis :
+Télécharge le fichier `AMZN_2006-01-01_to_2018-01-01.csv` sur Kaggle (recherche par son nom de fichier) et place-le dans ce dossier, puis :
 
 ```bash
 python rnn_amzn.py
